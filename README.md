@@ -18,6 +18,11 @@
 - Express.js
 - Prisma orm
 - Bcrypt.js
+- JWT
+
+## Functions finished
+- login
+- register
 
 ## How to use the app:
 - download visual studio code >> https://code.visualstudio.com/download?_exp_download=fb315fc982
