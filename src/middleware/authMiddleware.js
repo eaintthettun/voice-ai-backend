@@ -10,8 +10,8 @@ const authMiddleware = async (req, res, next) => {
 
         //returns the decoded payload if the token is valid, otherwise throws an error
         const decodedPayload = jwt.verify(token, process.env.JWT_SECRET);
-
         req.user = decodedPayload;
+
         return next();
     } catch (error) {
         return res.status(401).json({ message: "Invalid token" });

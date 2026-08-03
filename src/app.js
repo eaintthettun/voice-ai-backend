@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes.js");
+const diaryEntryRoutes = require("./routes/diaryEntryRoutes.js");
+const auth=require("./middleware/authMiddleware.js");
 const app = express();
 
 app.use(cors());
@@ -8,7 +10,15 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth",authRoutes);
+app.use("/api/diaryEntries", diaryEntryRoutes); 
 
 app.listen(3000, () => {
     console.log("Node server running on port 3000");
 });
+
+//home page where diary entries are shown
+app.get('/',auth, async (req, res) => {
+    const userId = req.user.user_id; // Access the user ID from the decoded token
+
+    res.send('Home page');
+}) 
