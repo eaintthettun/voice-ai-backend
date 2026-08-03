@@ -56,3 +56,16 @@ replication:
 - npx prisma generate
 
 Note: to sync the database, use command **npx prisma db push**
+
+## Set up environment variables
+
+    Create a .env file or use a .env.local template I have provided and fill necessary fields :
+
+    DATABASE_URL="your_db_connection_string"
+    JWT_SECRET="your_secret_key"
+
+    ## 📁 Example .env
+
+        DATABASE_URL="mongodb://localhost:27017/your_db_name"
+        JWT_SECRET="your_secret_key"
+
