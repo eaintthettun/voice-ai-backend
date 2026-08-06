@@ -15,10 +15,3 @@ app.use("/api/diaryEntries", diaryEntryRoutes);
 app.listen(3000, () => {
     console.log("Node server running on port 3000");
 });
-
-//home page where diary entries are shown
-app.get('/',auth, async (req, res) => {
-    const userId = req.user.user_id; // Access the user ID from the decoded token
-
-    res.send('Home page');
-}) 

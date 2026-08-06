@@ -1,12 +1,12 @@
-const diaryEntryRepo=require('../repositories/diaryEntryRepository.js');
+const diaryEntryRepo=require('../repository/diaryEntryRepository.js');
 
-const getDiaryEntriesByUserID = async (userId) => {
+const getDiaryEntries = async (userId) => {
     if(!userId){
         throw new Error("User ID is required");
     }
-    return await diaryEntryRepo.getByUserId(userId);
+    return await diaryEntryRepo.getDiaryEntries(userId);
 };
 
 module.exports = {
-    getDiaryEntriesByUserID
+    getDiaryEntries
 };
