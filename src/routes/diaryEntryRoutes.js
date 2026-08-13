@@ -1,9 +1,10 @@
-const express=require('express');
-const router=express.Router();
-const diaryEntryController=require('../controllers/diaryEntryController.js');
-const auth=require('../middleware/authMiddleware.js');
+import { Router } from 'express';
+const router=Router();
+import { getDiaryEntries, createDiaryEntry } from '../controllers/diaryEntryController.js';
+import auth from '../middleware/authMiddleware.js';
 
 //prefix  /diaryEntries
-router.get('/',auth,diaryEntryController.getDiaryEntries);
+router.get('/',auth,getDiaryEntries);
+router.post('/',auth,createDiaryEntry);
 
-module.exports=router;
+export default router;

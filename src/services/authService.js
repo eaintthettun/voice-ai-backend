@@ -1,6 +1,6 @@
-const authRepository = require('../repository/authRepository');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import authRepository from '../repository/authRepository';
+import { hash, compare } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
 
 const registerUser = async (userData) => {
     const { username, email, password } = userData;
@@ -15,7 +15,7 @@ const registerUser = async (userData) => {
         throw new Error("User already exists");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hash(password, 10);
     const result = await authRepository.createUser({ username, email, password: hashedPassword });
 
     return result;
@@ -32,12 +32,12 @@ const loginUser = async (userData) => {
         throw new Error("User is not found");
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await compare(password, user.password);
     if (!isMatch) {
         throw new Error("Incorrect password");
     }
 
-    const token = jwt.sign(
+    const token = sign(
         {
             userId: user.id,
             email: user.email
@@ -51,7 +51,7 @@ const loginUser = async (userData) => {
     return {user, token};
 };
 
-module.exports = {
+export default {
     registerUser,
     loginUser
 };

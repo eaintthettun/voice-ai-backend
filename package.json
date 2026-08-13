@@ -14,12 +14,14 @@
   "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "axios": "^1.18.1",
+    "axios": "^1.19.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "form-data": "^4.0.6",
     "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
     "prisma": "^6.19.3"
   },
   "devDependencies": {
@@ -30,6 +32,9 @@
     "bcrypt@6.0.0": true,
     "@prisma/client@6.19.3": true,
     "prisma@6.19.3": true,
-    "jsonwebtoken@9.0.3": true
+    "jsonwebtoken@9.0.3": true,
+    "axios@1.19.0": true,
+    "form-data@4.0.6": true,
+    "multer@2.2.0": true
   }
 }

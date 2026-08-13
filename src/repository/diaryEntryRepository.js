@@ -1,4 +1,4 @@
-const prisma=require('../config/prisma.js');
+import prisma from '../config/prisma.js';
 
 const getDiaryEntries = async (userId) => {
     const diaryEntries = await prisma.diaryEntry.findMany({
@@ -7,6 +7,10 @@ const getDiaryEntries = async (userId) => {
     return diaryEntries;
 }
 
-module.exports = {
+const createDiaryEntry = async (diaryData) => {
+    return await prisma.diaryEntry.create({data:diaryData})
+}
+
+export default {
     getDiaryEntries
 };

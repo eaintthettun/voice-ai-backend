@@ -1,13 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-const authRoutes = require("./routes/authRoutes.js");
-const diaryEntryRoutes = require("./routes/diaryEntryRoutes.js");
-const auth=require("./middleware/authMiddleware.js");
+import express, { json } from "express";
+import cors from "cors";
+import authRoutes from "./routes/authRoutes.js";
+import diaryEntryRoutes from "./routes/diaryEntryRoutes.js";
+import auth from "./middleware/authMiddleware.js";
 const app = express();
 
 app.use(cors());
 // Middleware to parse JSON request bodies from incoming requests
-app.use(express.json());
+app.use(json());
 
 app.use("/api/auth",authRoutes);
 app.use("/api/diaryEntries", diaryEntryRoutes); 

@@ -1,16 +1,36 @@
-const diaryEntryService = require('../services/diaryEntryService.js');
+import { getDiaryEntries as _getDiaryEntries, createDiaryEntry as _createDiaryEntry } from '../services/diaryEntryService.js';
 
 
 const getDiaryEntries = async (req, res) => {
     try {
         const userId= req.user.userId; // Access the user ID from the decoded token
-        const diaryEntries = await diaryEntryService.getDiaryEntries(userId);
+        const diaryEntries = await _getDiaryEntries(userId);
         res.status(200).json({ diaryEntries });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
 
-module.exports = {
+const createDiaryEntry = async (req,res) => {
+    try{
+        //get audio and title from frontend
+        const {title}=req.body;
+        const {audio}=req.file;
+
+        const userId=req.user.userId;
+
+        //call ai service to get predicted category
+        const { transcript, predicted_category:category } = await aiService.predictAudio(audio);
+
+        
+        const diaryData={title,transcript,category,filePath,userId}
+        const result= await _createDiaryEntry(diaryData);
+        res.status(200).json({message:"Created diary entry successfully",diaryEntry:result})
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+export default {
     getDiaryEntries
 };
