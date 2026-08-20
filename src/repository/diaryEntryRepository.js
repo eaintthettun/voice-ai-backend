@@ -12,5 +12,6 @@ const createDiaryEntry = async (diaryData) => {
 }
 
 export default {
-    getDiaryEntries
+    getDiaryEntries,
+    createDiaryEntry
 };

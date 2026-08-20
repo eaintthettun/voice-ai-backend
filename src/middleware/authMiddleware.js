@@ -1,5 +1,5 @@
 //authentication middleware
-import { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 const authMiddleware = async (req, res, next) => {
     try {
@@ -9,7 +9,7 @@ const authMiddleware = async (req, res, next) => {
         }
 
         //returns the decoded payload if the token is valid, otherwise throws an error
-        const decodedPayload = verify(token, process.env.JWT_SECRET);
+        const decodedPayload = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decodedPayload;
 
         return next();

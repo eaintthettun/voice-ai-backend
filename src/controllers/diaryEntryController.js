@@ -1,10 +1,10 @@
-import { getDiaryEntries as _getDiaryEntries, createDiaryEntry as _createDiaryEntry } from '../services/diaryEntryService.js';
 import aiService from '../services/aiService.js';
+import diaryEntryService from '../services/diaryEntryService.js';
 
 const getDiaryEntries = async (req, res) => {
     try {
         const userId= req.user.userId; // Access the user ID from the decoded token
-        const diaryEntries = await _getDiaryEntries(userId);
+        const diaryEntries = await diaryEntryService.getDiaryEntries(userId);
         res.status(200).json({ diaryEntries });
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -26,7 +26,7 @@ const createDiaryEntry = async (req,res) => {
         const { transcript, predicted_category:category } = await aiService.predictAudio(audio);
         
         const diaryData={title,transcript,category,filePath,userId}
-        const result= await _createDiaryEntry(diaryData);
+        const result= await diaryEntryService.createDiaryEntry(diaryData);
         res.status(200).json({message:"Created diary entry successfully",diaryEntry:result})
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -34,5 +34,6 @@ const createDiaryEntry = async (req,res) => {
 }
 
 export default {
-    getDiaryEntries
+    getDiaryEntries,
+    createDiaryEntry
 };

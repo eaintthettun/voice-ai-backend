@@ -1,10 +1,10 @@
-import { getDiaryEntries as _getDiaryEntries, createDiaryEntry as _createDiaryEntry } from '../repository/diaryEntryRepository.js';
+import diaryEntryRepository from '../repository/diaryEntryRepository.js';
 
 const getDiaryEntries = async (userId) => {
     if(!userId){
         throw new Error("User ID is required");
     }
-    return await _getDiaryEntries(userId);
+    return await diaryEntryRepository.getDiaryEntries(userId);
 };
 
 const createDiaryEntry = async (diaryData) => {
@@ -16,9 +16,10 @@ const createDiaryEntry = async (diaryData) => {
         throw new Error("Form fields are required")
     }
 
-    return await _createDiaryEntry(diaryData)
+    return await diaryEntryRepository.createDiaryEntry(diaryData)
 }
 
 export default {
-    getDiaryEntries
+    getDiaryEntries,
+    createDiaryEntry
 };
