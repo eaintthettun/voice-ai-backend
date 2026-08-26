@@ -7,6 +7,13 @@ const getDiaryEntries = async (userId) => {
     return await diaryEntryRepository.getDiaryEntries(userId);
 };
 
+const getRecentDiaryEntries = async (userId) => {
+    if(!userId){
+        throw new Error("User ID is required");
+    }
+    return await diaryEntryRepository.getRecentDiaryEntries(userId);
+};
+
 const createDiaryEntry = async (diaryData) => {
      if(!diaryData.userId){
         throw new Error("User ID is required");
@@ -21,5 +28,6 @@ const createDiaryEntry = async (diaryData) => {
 
 export default {
     getDiaryEntries,
+    getRecentDiaryEntries,
     createDiaryEntry
 };

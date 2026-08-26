@@ -11,7 +11,17 @@ const getDiaryEntries = async (req, res) => {
     }
 };
 
-const createDiaryEntry = async (req,res) => {
+const getRecentDiaryEntries = async (req, res) => {
+    try {
+        const userId= req.user.userId; // Access the user ID from the decoded token
+        const recentDiaryEntries = await diaryEntryService.getRecentDiaryEntries(userId);
+        res.status(200).json({ recentDiaryEntries });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const transcribeDiaryEntry = async (req,res) => {
     try{
         //get audio and title from frontend
         const {title}=req.body;
@@ -25,9 +35,9 @@ const createDiaryEntry = async (req,res) => {
         //call ai service to get predicted category
         const { transcript, predicted_category:category } = await aiService.predictAudio(audio);
         
-        const diaryData={title,transcript,category,filePath,userId}
-        const result= await diaryEntryService.createDiaryEntry(diaryData);
-        res.status(200).json({message:"Created diary entry successfully",diaryEntry:result})
+        res.status(200).json(
+            {message:"Transcribed diary entry successfully"
+            ,transcript,category})
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -35,5 +45,6 @@ const createDiaryEntry = async (req,res) => {
 
 export default {
     getDiaryEntries,
-    createDiaryEntry
+    transcribeDiaryEntry,
+    getRecentDiaryEntries
 };

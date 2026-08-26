@@ -5,7 +5,8 @@ import auth from '../middleware/authMiddleware.js';
 import upload from '../middleware/uploadMiddleware.js';
 
 //prefix  /diaryEntries
+router.get('/recent',auth,diaryEntryController.getRecentDiaryEntries);
 router.get('/',auth,diaryEntryController.getDiaryEntries);
-router.post('/',auth,upload.single('audio'),diaryEntryController.createDiaryEntry);
+router.post('/transcribe',auth,upload.single('audio'),diaryEntryController.transcribeDiaryEntry);
 
 export default router;
