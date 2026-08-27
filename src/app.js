@@ -12,6 +12,7 @@ app.use(json());
 app.use("/api/auth",authRoutes);
 app.use("/api/diaryEntries", diaryEntryRoutes); 
 
+console.log("Hello app.js")
 app.listen(3000, () => {
     console.log("Node server running on port 3000");
 });

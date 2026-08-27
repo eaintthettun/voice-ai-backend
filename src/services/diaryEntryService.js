@@ -15,7 +15,7 @@ const getRecentDiaryEntries = async (userId) => {
 };
 
 const createDiaryEntry = async (diaryData) => {
-     if(!diaryData.userId){
+    if(!diaryData.userId){
         throw new Error("User ID is required");
     }
 
