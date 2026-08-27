@@ -2,7 +2,7 @@ import fs from "fs";
 
 const categoryMap = {
     Learning: "LEARNING",
-    Meeting: "MEETING",
+    Meetings: "MEETING",
     Tasks: "TASKS"
 };
 
@@ -37,6 +37,8 @@ const predictAudio = async (audio) => {
     }
 
     const result = await response.json();
+
+    console.log('transcribe result:',result)
 
     return {
         transcript: result.transcript,

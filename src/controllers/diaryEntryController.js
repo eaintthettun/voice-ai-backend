@@ -61,9 +61,27 @@ const createDiaryEntry = async (req, res) => {
 
 }
 
+const deleteDiaryEntry = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const result = await diaryEntryService.deleteDiaryEntry(id)
+
+        res.status(200).json(
+            {
+                message: "Deleted diary entry successfully",
+                result
+            });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+
+}
+
 export default {
     getDiaryEntries,
     transcribeDiaryEntry,
     getRecentDiaryEntries,
-    createDiaryEntry
+    createDiaryEntry,
+    deleteDiaryEntry
 };

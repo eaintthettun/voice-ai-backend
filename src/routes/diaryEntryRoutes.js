@@ -9,5 +9,6 @@ router.get('/recent',auth,diaryEntryController.getRecentDiaryEntries);
 router.get('/',auth,diaryEntryController.getDiaryEntries);
 router.post('/transcribe',auth,upload.single('audio'),diaryEntryController.transcribeDiaryEntry);
 router.post('/',auth,diaryEntryController.createDiaryEntry);
+router.delete('/:id',auth,diaryEntryController.deleteDiaryEntry);
 
 export default router;
