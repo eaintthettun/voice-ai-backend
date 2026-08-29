@@ -12,7 +12,7 @@ const predictAudio = async (audio) => {
     // Read the audio file as a buffer
     const audioBuffer = fs.readFileSync(audio.path);
 
-    // Create a Blob object from the audio buffer and append it to the FormData
+    // Create a Blob object from the audio buffer and append it to the FormData(real audio)
     const audioBlob = new Blob(
         [audioBuffer],
         { type: audio.mimetype }

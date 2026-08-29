@@ -29,9 +29,28 @@ const deleteDiaryEntry = async (id) => {
     return await prisma.diaryEntry.delete({ where: {id} })
 }
 
+const editDiaryEntry = async (id,diaryData) => {
+    return await prisma.diaryEntry.update(
+        { 
+            where: {id},
+            data: diaryData
+        }
+    )
+}
+
+const getDiaryEntryDetail = async (id) => {
+    return await prisma.diaryEntry.findFirst(
+        { 
+            where: {id},
+        }
+    )
+}
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
     createDiaryEntry,
-    deleteDiaryEntry
+    deleteDiaryEntry,
+    editDiaryEntry,
+    getDiaryEntryDetail
 };

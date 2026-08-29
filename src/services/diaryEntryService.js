@@ -34,9 +34,27 @@ const deleteDiaryEntry = async (id) => {
     return await diaryEntryRepository.deleteDiaryEntry(id)
 }
 
+const editDiaryEntry = async (id,diaryData) => {
+    if(!id){
+        throw new Error("ID is required")
+    }
+
+    return await diaryEntryRepository.editDiaryEntry(id,diaryData)
+}
+
+const getDiaryEntryDetail = async (id,diaryData) => {
+    if(!id){
+        throw new Error("ID is required")
+    }
+
+    return await diaryEntryRepository.getDiaryEntryDetail(id,diaryData)
+}
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
     createDiaryEntry,
-    deleteDiaryEntry
+    deleteDiaryEntry,
+    editDiaryEntry,
+    getDiaryEntryDetail
 };

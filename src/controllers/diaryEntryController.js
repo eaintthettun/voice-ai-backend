@@ -75,7 +75,39 @@ const deleteDiaryEntry = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
+}
 
+const editDiaryEntry = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const {title,transcript}= req.body;
+
+        const result = await diaryEntryService.editDiaryEntry(id,{title,transcript})
+
+        res.status(200).json(
+            {
+                message: "Edited diary entry successfully",
+                result
+            });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+const getDiaryEntryDetail = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const diaryEntry = await diaryEntryService.getDiaryEntryDetail(id)
+
+        res.status(200).json(
+            {
+                message: "Diary entry detail get successfully",
+                diaryEntry
+            });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 }
 
 export default {
@@ -83,5 +115,7 @@ export default {
     transcribeDiaryEntry,
     getRecentDiaryEntries,
     createDiaryEntry,
-    deleteDiaryEntry
+    deleteDiaryEntry,
+    editDiaryEntry,
+    getDiaryEntryDetail
 };
