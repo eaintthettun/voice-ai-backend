@@ -23,8 +23,7 @@ const getRecentDiaryEntries = async (req, res) => {
 
 const transcribeDiaryEntry = async (req, res) => {
     try {
-        //get audio and title from frontend
-        const { title } = req.body;
+        //get audio from frontend
         const audio = req.file;
 
         //we get the path from multer middleware, which saves the file in uploads folder

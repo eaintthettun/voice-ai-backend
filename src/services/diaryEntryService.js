@@ -42,12 +42,12 @@ const editDiaryEntry = async (id,diaryData) => {
     return await diaryEntryRepository.editDiaryEntry(id,diaryData)
 }
 
-const getDiaryEntryDetail = async (id,diaryData) => {
+const getDiaryEntryDetail = async (id) => {
     if(!id){
         throw new Error("ID is required")
     }
 
-    return await diaryEntryRepository.getDiaryEntryDetail(id,diaryData)
+    return await diaryEntryRepository.getDiaryEntryDetail(id)
 }
 
 export default {
