@@ -36,5 +36,7 @@ router.delete('/:id', auth, diaryEntryController.deleteDiaryEntry);
 
 router.put('/:id', auth, diaryEntryController.editDiaryEntry);
 
+router.patch('/:id/favorite', auth, diaryEntryController.toggleFavoriteDiaryEntry);
+
 
 export default router;

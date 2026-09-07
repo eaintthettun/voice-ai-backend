@@ -113,6 +113,23 @@ const getFavoriteDiaryEntries = async (userId) => {
     return favoriteDiaryEntries;
 };
 
+const toggleFavoriteDiaryEntry = async (id) => {
+    const diaryEntry = await prisma.diaryEntry.findUnique({
+        where: { id },
+    });
+
+    if (!diaryEntry) {
+        throw new Error("Diary entry not found");
+    }
+
+    return await prisma.diaryEntry.update({
+        where: { id },
+        data: {
+            isFavorite: !diaryEntry.isFavorite
+        }
+    });
+};
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -123,5 +140,6 @@ export default {
     getDiaryEntriesByCategory,
     searchDiaryEntries,
     findDiaryEntriesByDateRange,
-    getFavoriteDiaryEntries
+    getFavoriteDiaryEntries,
+    toggleFavoriteDiaryEntry
 };

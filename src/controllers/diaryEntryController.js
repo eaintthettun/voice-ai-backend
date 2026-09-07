@@ -171,6 +171,20 @@ const getFavoriteDiaryEntries = async (req, res) => {
     }
 }
 
+const toggleFavoriteDiaryEntry = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await diaryEntryService.toggleFavoriteDiaryEntry(id);
+
+        res.status(200).json({
+            message: "Favorite status toggled successfully",
+            result
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 export default {
     getDiaryEntries,
     transcribeDiaryEntry,
@@ -182,5 +196,6 @@ export default {
     getDiaryEntriesByCategory,
     searchDiaryEntries,
     findDiaryEntriesByDateRange,
-    getFavoriteDiaryEntries
+    getFavoriteDiaryEntries,
+    toggleFavoriteDiaryEntry
 };
