@@ -19,6 +19,12 @@ router.post('/', auth, diaryEntryController.createDiaryEntry);
 
 router.get('/', auth, diaryEntryController.getDiaryEntries);
 
+router.get(
+  "/dateRange",
+  auth,
+  diaryEntryController.findDiaryEntriesByDateRange
+);
+
 // Dynamic routes
 router.get('/category/:categoryName', auth, diaryEntryController.getDiaryEntriesByCategory);
 

@@ -70,6 +70,17 @@ const searchDiaryEntries = async ({ userId, keyword }) => {
     return await diaryEntryRepository.searchDiaryEntries({ userId, keyword });
 };
 
+const findDiaryEntriesByDateRange = async ({ userId, startDate,endDate }) => {
+    if (!userId) {
+        throw new Error("User ID is required");
+    }
+    if (!startDate || !endDate) {
+        throw new Error("Date is required");
+    }
+    return await diaryEntryRepository.findDiaryEntriesByDateRange({ userId, startDate,endDate });
+};
+
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -78,5 +89,6 @@ export default {
     editDiaryEntry,
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
-    searchDiaryEntries
+    searchDiaryEntries,
+    findDiaryEntriesByDateRange
 };

@@ -47,7 +47,7 @@ const createDiaryEntry = async (req, res) => {
         const userId = req.user.userId;
         const { title, transcript, category, filePath } = req.body;
 
-        const result = await diaryEntryService.createDiaryEntry({title, transcript, category, filePath, userId})
+        const result = await diaryEntryService.createDiaryEntry({ title, transcript, category, filePath, userId })
 
         res.status(200).json(
             {
@@ -79,9 +79,9 @@ const deleteDiaryEntry = async (req, res) => {
 const editDiaryEntry = async (req, res) => {
     try {
         const { id } = req.params;
-        const {title,transcript}= req.body;
+        const { title, transcript } = req.body;
 
-        const result = await diaryEntryService.editDiaryEntry(id,{title,transcript})
+        const result = await diaryEntryService.editDiaryEntry(id, { title, transcript })
 
         res.status(200).json(
             {
@@ -114,7 +114,7 @@ const getDiaryEntriesByCategory = async (req, res) => {
         const userId = req.user.userId;
         const { categoryName } = req.params;
 
-        const diaryEntries = await diaryEntryService.getDiaryEntriesByCategory({ userId, category:categoryName });
+        const diaryEntries = await diaryEntryService.getDiaryEntriesByCategory({ userId, category: categoryName });
 
         res.status(200).json({
             message: "Diary entries by category retrieved successfully",
@@ -141,6 +141,22 @@ const searchDiaryEntries = async (req, res) => {
     }
 }
 
+const findDiaryEntriesByDateRange = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const { startDate, endDate } = req.query;
+
+        const diaryEntries = await diaryEntryService.findDiaryEntriesByDateRange({ userId, startDate, endDate });
+
+        res.status(200).json({
+            message: "Diary entries filterd by date range successfully",
+            diaryEntries
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 export default {
     getDiaryEntries,
     transcribeDiaryEntry,
@@ -150,5 +166,6 @@ export default {
     editDiaryEntry,
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
-    searchDiaryEntries
+    searchDiaryEntries,
+    findDiaryEntriesByDateRange
 };

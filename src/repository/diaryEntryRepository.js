@@ -72,6 +72,34 @@ const searchDiaryEntries = async ({ userId, searchKeyword }) => {
     return diaryEntries;
 }
 
+const findDiaryEntriesByDateRange = async ({
+    userId,
+    startDate,
+    endDate
+}) => {
+
+    // myanmar date + utc 6:30
+    const start = new Date(`${startDate}T00:00:00+06:30`);
+
+    const end = new Date(`${endDate}T00:00:00+06:30`);
+    end.setUTCDate(end.getUTCDate() + 1);
+
+    const diaryEntries = await prisma.diaryEntry.findMany({
+        where: {
+            userId,
+            createdAt: {
+                gte: start,
+                lt: end
+            }
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+
+    return diaryEntries;
+};
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -80,5 +108,6 @@ export default {
     editDiaryEntry,
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
-    searchDiaryEntries
+    searchDiaryEntries,
+    findDiaryEntriesByDateRange
 };
