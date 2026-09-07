@@ -149,8 +149,22 @@ const findDiaryEntriesByDateRange = async (req, res) => {
         const diaryEntries = await diaryEntryService.findDiaryEntriesByDateRange({ userId, startDate, endDate });
 
         res.status(200).json({
-            message: "Diary entries filterd by date range successfully",
+            message: "Diary entries filtered by date range successfully",
             diaryEntries
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+const getFavoriteDiaryEntries = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const favoriteDiaryEntries = await diaryEntryService.getFavoriteDiaryEntries(userId);
+
+        res.status(200).json({
+            message: "Favorite diary entries retrieved successfully",
+            favoriteDiaryEntries
         });
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -167,5 +181,6 @@ export default {
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
     searchDiaryEntries,
-    findDiaryEntriesByDateRange
+    findDiaryEntriesByDateRange,
+    getFavoriteDiaryEntries
 };

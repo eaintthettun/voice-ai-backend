@@ -80,6 +80,12 @@ const findDiaryEntriesByDateRange = async ({ userId, startDate,endDate }) => {
     return await diaryEntryRepository.findDiaryEntriesByDateRange({ userId, startDate,endDate });
 };
 
+const getFavoriteDiaryEntries = async (userId) => {
+    if (!userId) {
+        throw new Error("User ID is required");
+    }
+    return await diaryEntryRepository.getFavoriteDiaryEntries(userId);
+}
 
 export default {
     getDiaryEntries,
@@ -90,5 +96,6 @@ export default {
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
     searchDiaryEntries,
-    findDiaryEntriesByDateRange
+    findDiaryEntriesByDateRange,
+    getFavoriteDiaryEntries
 };

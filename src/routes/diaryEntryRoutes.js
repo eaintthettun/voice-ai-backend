@@ -25,6 +25,8 @@ router.get(
   diaryEntryController.findDiaryEntriesByDateRange
 );
 
+router.get('/favorite', auth, diaryEntryController.getFavoriteDiaryEntries);
+
 // Dynamic routes
 router.get('/category/:categoryName', auth, diaryEntryController.getDiaryEntriesByCategory);
 
@@ -33,5 +35,6 @@ router.get('/:id', auth, diaryEntryController.getDiaryEntryDetail);
 router.delete('/:id', auth, diaryEntryController.deleteDiaryEntry);
 
 router.put('/:id', auth, diaryEntryController.editDiaryEntry);
+
 
 export default router;

@@ -100,6 +100,19 @@ const findDiaryEntriesByDateRange = async ({
     return diaryEntries;
 };
 
+const getFavoriteDiaryEntries = async (userId) => {
+    const favoriteDiaryEntries = await prisma.diaryEntry.findMany({
+        where: {
+            userId,
+            isFavorite: true
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+    return favoriteDiaryEntries;
+};
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -109,5 +122,6 @@ export default {
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
     searchDiaryEntries,
-    findDiaryEntriesByDateRange
+    findDiaryEntriesByDateRange,
+    getFavoriteDiaryEntries
 };
