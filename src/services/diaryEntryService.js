@@ -1,4 +1,4 @@
-import diaryEntryRepository from '../repository/diaryEntryRepository.js';
+import diaryEntryRepository from '../repositories/diaryEntryRepository.js';
 
 const getDiaryEntries = async (userId) => {
     if(!userId){
@@ -87,6 +87,13 @@ const getFavoriteDiaryEntries = async (userId) => {
     return await diaryEntryRepository.getFavoriteDiaryEntries(userId);
 }
 
+const toggleFavoriteDiaryEntry = async (id) => {
+    if (!id) {
+        throw new Error("ID is required");
+    }
+    return await diaryEntryRepository.toggleFavoriteDiaryEntry(id);
+}
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -97,5 +104,6 @@ export default {
     getDiaryEntriesByCategory,
     searchDiaryEntries,
     findDiaryEntriesByDateRange,
-    getFavoriteDiaryEntries
+    getFavoriteDiaryEntries,
+    toggleFavoriteDiaryEntry
 };

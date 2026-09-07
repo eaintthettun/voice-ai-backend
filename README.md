@@ -1,13 +1,27 @@
-# API For Personal Workspace Diary Mobile App
+# Personal Workspace Diary API
+
+## 🔗 Project Repositories
+
+- 📱 **Frontend (React Native):** [View Repository](https://github.com/eaintthettun/voice-ai-frontend)
+- 🖥️ **Backend (Node.js + Express):** [View Repository](https://github.com/eaintthettun/voice-ai-backend)
+- 🤖 **AI Service (Python + Flask):** [View Repository](https://github.com/eaintthettun/voice-ai-python-service)
+
+## Project structure
+    src/
+    ├── controllers/
+    ├── services/
+    ├── repositories/
+    ├── routes/
+    ├── middleware/
+    └── app.js
 
 ## Features
 - 🎤 Voice Recording
 - 🤖 AI Classification
-- 📅 Daily / Weekly / Monthly Diary
-- 🔍 Search & Filters
+- 🔍 Search & Filters 
 - 📊 Statistics Dashboard
-- 📈 AI Weekly Summary
-- ✏️ Edit Transcript & Category
+- 📈 Weekly Summary
+- ✏️ Edit Transcript
 - ▶️ Audio Playback
 - ⭐ Favorite / Pin Notes
 - 📄 Export to PDF or CSV
@@ -18,11 +32,26 @@
 - Express.js
 - Prisma orm
 - Bcrypt.js
-- JWT
+- Json Web Token
+- Multer
 
-## Functions finished
-- login
-- register
+## API table
+| Method | Endpoint                           | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| POST   | `/auth/register`                   | Register user             |
+| POST   | `/auth/login`                      | Login                     |
+| GET    | `/diaryEntries`                    | Get user's diary entries  |
+| GET    | `/diaryEntries/recent`             | Get recent diary entries  |
+| GET    | `/diaryEntries/searchKeyword`      | Search diary              |
+| POST   | `/diaryEntries/transcribe`         | Upload audio and classify |
+| POST   | `/diaryEntries`                    | Create diary entry        |
+| GET    | `/diaryEntries/dateRange`          | Filter by date            |
+| GET    | `/diaryEntries/category/:category` | Filter by category        |
+| GET    | `/diaryEntries/favorites`          | Get favorite entries      |
+| GET    | `/diaryEntries/:id`                | Get diary detail          |
+| PUT    | `/diaryEntries/:id`                | Edit diary                |
+| DELETE | `/diaryEntries/:id`                | Delete diary              |
+| PATCH  | `/diaryEntries/:id/favorite`       | Toggle favorite           |
 
 ## How to use the app:
 - download visual studio code >> https://code.visualstudio.com/download?_exp_download=fb315fc982
@@ -69,3 +98,17 @@ Note: to sync the database, use command **npx prisma db push**
         DATABASE_URL="mongodb://localhost:27017/your_db_name"
         JWT_SECRET="your_secret_key"
 
+## To start the server
+    use `npm run dev`
+    After starting it, the app will run at `http://localhost:3000`
+
+## For protected routes, they require `Authorization: Bearer <JWT_TOKEN>`
+
+## 🤖 AI Service
+
+The AI service is implemented separately using Python and Flask.
+
+The Node.js backend communicates with the Python service through HTTP requests
+for audio transcription and ML-based category classification.
+
+👉 [View AI Service Repository](https://github.com/eaintthettun/voice-ai-python-service)

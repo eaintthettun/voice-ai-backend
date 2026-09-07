@@ -9,6 +9,8 @@ import upload from '../middleware/uploadMiddleware.js';
 // prefix: /diaryEntries
 
 // Static routes
+router.get('/', auth, diaryEntryController.getDiaryEntries);
+
 router.get('/recent', auth, diaryEntryController.getRecentDiaryEntries);
 
 router.get('/searchKeyword', auth, diaryEntryController.searchDiaryEntries);
@@ -17,7 +19,6 @@ router.post('/transcribe', auth, upload.single('audio'), diaryEntryController.tr
 
 router.post('/', auth, diaryEntryController.createDiaryEntry);
 
-router.get('/', auth, diaryEntryController.getDiaryEntries);
 
 router.get(
   "/dateRange",
