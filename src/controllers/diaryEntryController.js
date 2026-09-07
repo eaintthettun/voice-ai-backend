@@ -112,12 +112,28 @@ const getDiaryEntryDetail = async (req, res) => {
 const getDiaryEntriesByCategory = async (req, res) => {
     try {
         const userId = req.user.userId;
-        const { category } = req.params;
+        const { categoryName } = req.params;
 
-        const diaryEntries = await diaryEntryService.getDiaryEntriesByCategory({ userId, category });
+        const diaryEntries = await diaryEntryService.getDiaryEntriesByCategory({ userId, category:categoryName });
 
         res.status(200).json({
             message: "Diary entries by category retrieved successfully",
+            diaryEntries
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+const searchDiaryEntries = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const { keyword } = req.query;
+
+        const diaryEntries = await diaryEntryService.searchDiaryEntries({ userId, keyword });
+
+        res.status(200).json({
+            message: "Diary entries searched successfully",
             diaryEntries
         });
     } catch (error) {
@@ -133,5 +149,6 @@ export default {
     deleteDiaryEntry,
     editDiaryEntry,
     getDiaryEntryDetail,
-    getDiaryEntriesByCategory
+    getDiaryEntriesByCategory,
+    searchDiaryEntries
 };

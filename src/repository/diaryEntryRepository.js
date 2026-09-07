@@ -56,6 +56,22 @@ const getDiaryEntriesByCategory = async ({ userId, category }) => {
     return diaryEntries;
 }
 
+const searchDiaryEntries = async ({ userId, searchKeyword }) => {
+    const diaryEntries = await prisma.diaryEntry.findMany({
+        where: {
+            userId,
+            OR: [
+                { title: { contains: searchKeyword } },
+                { transcript: { contains: searchKeyword } }
+            ]
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+    return diaryEntries;
+}
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -63,5 +79,6 @@ export default {
     deleteDiaryEntry,
     editDiaryEntry,
     getDiaryEntryDetail,
-    getDiaryEntriesByCategory
+    getDiaryEntriesByCategory,
+    searchDiaryEntries
 };

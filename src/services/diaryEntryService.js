@@ -60,6 +60,16 @@ const getDiaryEntriesByCategory = async ({ userId, category }) => {
     return await diaryEntryRepository.getDiaryEntriesByCategory({ userId, category });
 };  
 
+const searchDiaryEntries = async ({ userId, keyword }) => {
+    if (!userId) {
+        throw new Error("User ID is required");
+    }
+    if (!keyword) {
+        throw new Error("Keyword is required");
+    }
+    return await diaryEntryRepository.searchDiaryEntries({ userId, keyword });
+};
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -67,5 +77,6 @@ export default {
     deleteDiaryEntry,
     editDiaryEntry,
     getDiaryEntryDetail,
-    getDiaryEntriesByCategory
+    getDiaryEntriesByCategory,
+    searchDiaryEntries
 };
