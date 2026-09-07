@@ -46,11 +46,22 @@ const getDiaryEntryDetail = async (id) => {
     )
 }
 
+const getDiaryEntriesByCategory = async ({ userId, category }) => {
+    const diaryEntries = await prisma.diaryEntry.findMany({
+        where: { userId, category },
+        orderBy: {
+            createdAt: 'desc'
+        },
+    });
+    return diaryEntries;
+}
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
     createDiaryEntry,
     deleteDiaryEntry,
     editDiaryEntry,
-    getDiaryEntryDetail
+    getDiaryEntryDetail,
+    getDiaryEntriesByCategory
 };

@@ -50,11 +50,22 @@ const getDiaryEntryDetail = async (id) => {
     return await diaryEntryRepository.getDiaryEntryDetail(id)
 }
 
+const getDiaryEntriesByCategory = async ({ userId, category }) => {
+    if (!userId) {
+        throw new Error("User ID is required");
+    }
+    if (!category) {
+        throw new Error("Category is required");
+    }
+    return await diaryEntryRepository.getDiaryEntriesByCategory({ userId, category });
+};  
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
     createDiaryEntry,
     deleteDiaryEntry,
     editDiaryEntry,
-    getDiaryEntryDetail
+    getDiaryEntryDetail,
+    getDiaryEntriesByCategory
 };

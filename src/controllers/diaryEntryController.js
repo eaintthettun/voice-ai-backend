@@ -109,6 +109,22 @@ const getDiaryEntryDetail = async (req, res) => {
     }
 }
 
+const getDiaryEntriesByCategory = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const { category } = req.params;
+
+        const diaryEntries = await diaryEntryService.getDiaryEntriesByCategory({ userId, category });
+
+        res.status(200).json({
+            message: "Diary entries by category retrieved successfully",
+            diaryEntries
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 export default {
     getDiaryEntries,
     transcribeDiaryEntry,
@@ -116,5 +132,6 @@ export default {
     createDiaryEntry,
     deleteDiaryEntry,
     editDiaryEntry,
-    getDiaryEntryDetail
+    getDiaryEntryDetail,
+    getDiaryEntriesByCategory
 };

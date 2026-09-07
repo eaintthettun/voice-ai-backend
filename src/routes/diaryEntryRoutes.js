@@ -13,5 +13,6 @@ router.delete('/:id',auth,diaryEntryController.deleteDiaryEntry);
 router.put('/:id',auth,diaryEntryController.editDiaryEntry);
 router.get('/',auth,diaryEntryController.getDiaryEntries);
 router.get('/:id',auth,diaryEntryController.getDiaryEntryDetail);
+router.get('/category',auth,diaryEntryController.getDiaryEntriesByCategory);
 
 export default router;
