@@ -13,20 +13,16 @@ router.get('/', auth, diaryEntryController.getDiaryEntries);
 
 router.get('/recent', auth, diaryEntryController.getRecentDiaryEntries);
 
-router.get('/searchKeyword', auth, diaryEntryController.searchDiaryEntries);
+router.get('/search', auth, diaryEntryController.searchDiaryEntries);
 
 router.post('/transcribe', auth, upload.single('audio'), diaryEntryController.transcribeDiaryEntry);
 
 router.post('/', auth, diaryEntryController.createDiaryEntry);
 
-
-router.get(
-  "/dateRange",
-  auth,
-  diaryEntryController.findDiaryEntriesByDateRange
-);
-
 router.get('/favorite', auth, diaryEntryController.getFavoriteDiaryEntries);
+
+router.get('/statistics/current-week/trend', auth, diaryEntryController.getCurrentWeekTrend);
+router.get('/statistics/current-week/summary', auth, diaryEntryController.getCurrentWeekSummary);
 
 // Dynamic routes
 router.get('/category/:categoryName', auth, diaryEntryController.getDiaryEntriesByCategory);

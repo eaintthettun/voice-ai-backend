@@ -70,16 +70,6 @@ const searchDiaryEntries = async ({ userId, keyword }) => {
     return await diaryEntryRepository.searchDiaryEntries({ userId, keyword });
 };
 
-const findDiaryEntriesByDateRange = async ({ userId, startDate,endDate }) => {
-    if (!userId) {
-        throw new Error("User ID is required");
-    }
-    if (!startDate || !endDate) {
-        throw new Error("Date is required");
-    }
-    return await diaryEntryRepository.findDiaryEntriesByDateRange({ userId, startDate,endDate });
-};
-
 const getFavoriteDiaryEntries = async (userId) => {
     if (!userId) {
         throw new Error("User ID is required");
@@ -94,6 +84,22 @@ const toggleFavoriteDiaryEntry = async (id) => {
     return await diaryEntryRepository.toggleFavoriteDiaryEntry(id);
 }
 
+const getCurrentWeekTrend = async(userId) => {
+    if(!userId){
+        throw new Error("User id is required");
+    }
+
+    return await diaryEntryRepository.getCurrentWeekTrend(userId)
+}
+
+const getCurrentWeekSummary = async(userId) => {
+    if(!userId){
+        throw new Error("User id is required");
+    }
+
+    return await diaryEntryRepository.getCurrentWeekSummary(userId)
+}
+
 export default {
     getDiaryEntries,
     getRecentDiaryEntries,
@@ -103,7 +109,8 @@ export default {
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
     searchDiaryEntries,
-    findDiaryEntriesByDateRange,
     getFavoriteDiaryEntries,
-    toggleFavoriteDiaryEntry
+    toggleFavoriteDiaryEntry,
+    getCurrentWeekTrend,
+    getCurrentWeekSummary
 };

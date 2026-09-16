@@ -141,22 +141,6 @@ const searchDiaryEntries = async (req, res) => {
     }
 }
 
-const findDiaryEntriesByDateRange = async (req, res) => {
-    try {
-        const userId = req.user.userId;
-        const { startDate, endDate } = req.query;
-
-        const diaryEntries = await diaryEntryService.findDiaryEntriesByDateRange({ userId, startDate, endDate });
-
-        res.status(200).json({
-            message: "Diary entries filtered by date range successfully",
-            diaryEntries
-        });
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-}
-
 const getFavoriteDiaryEntries = async (req, res) => {
     try {
         const userId = req.user.userId;
@@ -185,6 +169,35 @@ const toggleFavoriteDiaryEntry = async (req, res) => {
     }
 }
 
+const getCurrentWeekActivityTrend = async (req,res) => {
+    try{
+        const userId=req.user.userId;
+        const data=await diaryEntryService.getCurrentWeekActivityTrend(userId);
+
+        res.status(200).json({
+            message: "Current Week Activity Trend fetched successfully",
+            data
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+//this return all the entries, entries of each category to show in statistics screen
+const getAllEntriesForStatistics = async (req,res) => {
+    try{
+        const userId=req.user.userId;
+        const data=await diaryEntryService.getAllEntriesForStatistics(userId);
+
+        res.status(200).json({
+            message: "All entries and entries of each category are fetched successfully",
+            data
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 export default {
     getDiaryEntries,
     transcribeDiaryEntry,
@@ -195,7 +208,8 @@ export default {
     getDiaryEntryDetail,
     getDiaryEntriesByCategory,
     searchDiaryEntries,
-    findDiaryEntriesByDateRange,
     getFavoriteDiaryEntries,
-    toggleFavoriteDiaryEntry
+    toggleFavoriteDiaryEntry,
+    getCurrentWeekActivityTrend,
+    getAllEntriesForStatistics
 };

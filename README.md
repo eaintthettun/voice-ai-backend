@@ -45,7 +45,6 @@
 | GET    | `/diaryEntries/searchKeyword`      | Search diary              |
 | POST   | `/diaryEntries/transcribe`         | Upload audio and classify |
 | POST   | `/diaryEntries`                    | Create diary entry        |
-| GET    | `/diaryEntries/dateRange`          | Filter by date            |
 | GET    | `/diaryEntries/category/:category` | Filter by category        |
 | GET    | `/diaryEntries/favorites`          | Get favorite entries      |
 | GET    | `/diaryEntries/:id`                | Get diary detail          |

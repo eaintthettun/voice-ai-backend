@@ -8,11 +8,15 @@ const app = express();
 app.use(cors());
 // Middleware to parse JSON request bodies from incoming requests
 app.use(json());
+// Middleware to serve static files from the "uploads" directory
+app.use("/uploads", express.static("uploads"));
 
 app.use("/api/auth",authRoutes);
 app.use("/api/diaryEntries", diaryEntryRoutes); 
 
 console.log("Hello app.js")
+
+
 app.listen(3000, () => {
     console.log("Node server running on port 3000");
 });
